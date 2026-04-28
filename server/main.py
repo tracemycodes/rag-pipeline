@@ -1,6 +1,10 @@
-def main():
-    print("Hello from server!")
+from fastapi import FastAPI
+from app.modules.users.users import router as users_router
+
+app = FastAPI()
+
+@app.get("/health")
+def health_check():    return {"status": "healthy"}
 
 
-if __name__ == "__main__":
-    main()
+app.include_router(users_router)
